@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" 
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.devMode" value="true"></constant>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+	<package name="default" namespace = "/" extends = "struts-default">
+		<action name = "login" class = "userAction" method="login">
+			<result name = "admin" type="chain">admin_index</result>
+			<result name = "user" type="chain">user_index</result>
+			<result name = "input">/user_login.jsp</result>
+		</action>
+		<action name = "logout" class = "userAction" method="logout">
+			<result name = "logout" type="redirect">/user_login.jsp</result>
+			<result name = "error">/error.jsp</result>
+		</action>
+		<action name = "user_index" class = "userAction" method="userFindAll">
+			<result name = "userFindAll">/user_index.jsp</result>
+			<result name = "error">/error.jsp</result>
+		</action>
+		<action name = "user_look" class = "userAction" method="ulook">
+			<result name = "ulook">/user_look.jsp</result>
+			<result name = "error">/error.jsp</result>
+		</action>
+		<action name = "user_self" class = "userAction" method="self">
+			<result name = "self">/user_self.jsp</result>
+		</action>
+		<action name = "user_update" class = "userAction" method="update">
+			<result name = "update" type="chain">user_index</result>
+		</action>
+		<action name = "user_find" class = "userAction" method="findBySkill">
+			<result name = "findBySkill">/user_find.jsp</result>
+			<result name = "error">/error.jsp</result>
+		</action>
+		<action name = "user_star" class = "userAction" method="ustar">
+			<result name = "ustar" type="chain">user_look</result>
+		</action>
+		<action name = "user_toContact" class = "contactAction" method="toContact">
+			<result name = "toContact">/contact.jsp</result>
+		</action>
+		<action name = "user_contact" class = "contactAction" method="contact">
+			<result name = "contact_s" type="chain">user_index</result>
+		</action>
+		<action name = "user_myContact" class = "contactAction" method="find_myContact">
+			<result name = "ok">/myContact.jsp</result>
+		</action>
+		<action name = "user_myyContact" class = "contactAction" method="find_myyContact">
+			<result name = "ok">/myyContact.jsp</result>
+		</action>
+		<action name = "look_contact" class = "contactAction" method="look_contact">
+			<result name = "look_contact">/look_contact.jsp</result>
+		</action>
+		<action name = "contact_delete" class = "contactAction" method="delete">
+			<result name = "delete" type="redirectAction">user_myContact?usId=${usId}</result>
+		</action>
+		<action name = "user_findComment" class = "commentAction" method="findComment">
+			<result name = "findComment">/user_comment.jsp</result>
+		</action>
+		<action name = "user_writeComment1" class = "commentAction" method="writeComment1">
+			<result name = "writeComment1">/user_writeComment.jsp</result>
+		</action>
+		<action name = "user_writeComment" class = "commentAction" method="writeComment">
+			<result name = "writeComment" type="redirectAction">user_findComment?uId=${uId}</result>
+		</action>
+		<action name = "register" class = "userAction" method="register">
+			<result name = "register">/user_login.jsp</result>
+			<result name = "noregister">/register.jsp</result>
+		</action>		
+		<action name = "admin_index" class = "userAction" method="findAll">
+			<result name = "findAll">/admin_index.jsp</result>
+			<result name = "error">/error.jsp</result>
+		</action>
+		<action name = "admin_look" class = "userAction" method="look">
+			<result name = "look" >/admin_look.jsp</result>
+			<result name = "error">/error.jsp</result>
+		</action>
+		<action name = "admin_delete" class = "userAction" method="delete">
+			<result name = "delete" type="redirectAction">admin_index</result>
+		</action>
+		<action name = "admin_find" class = "userAction" method="findByName">
+			<result name = "findByName">/admin_find.jsp</result>
+			<result name = "error">/error.jsp</result>
+		</action>
+	</package>
+</struts>
